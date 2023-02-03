@@ -1,22 +1,25 @@
 <!DOCTYPE html>
+<!---I am using thymeleaf templating engine -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
+   <!--Creating HTML forms --> 
+   <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <title>Design form</title>
+    <title>Form Design</title>
   </head>
   <body>
     <div
       class="d-flex flex-column bd-highlight justify-content-center align-items-center w-75 ms-5"
     >
-      <h1 class="mb-3">Design Tekken Reborn Fighter</h1>
+    <!--form Title-->
+      <h1 class="mb-3"> Tekken Reborn Fighter</h1>
       <form>
         <div class="mb-3">
           <label for="fighterName" class="form-label">Fighter name: </label>
@@ -27,7 +30,7 @@
             aria-describedby="fighterHelp"
           />
           <div id="fighterHelp" class="form-text">
-            Provide decent fighter name
+            Choose appropriate fighter name
           </div>
         </div>
         <div class="mb-3">
