@@ -6,14 +6,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.cpan252.tekkenreborn.controller.HomeController;
 
-/**
- * mvn spring-boot:run does following steps
- * 1. mvn clean
- * 2. mvn compile
- * 3. mvn package
- * 4. java -jar target/tekkenreborn-0.0.1-SNAPSHOT.jar
- * 5. deploys jar to embedded tomcat
- */
+
 @SpringBootApplication
 public class TekkenrebornApplication {
 
@@ -28,5 +21,4 @@ public class TekkenrebornApplication {
 		ApplicationContext context = SpringApplication.run(TekkenrebornApplication.class, args);
 		HomeController controller = context.getBean(HomeController.class);
 	}
-
 }

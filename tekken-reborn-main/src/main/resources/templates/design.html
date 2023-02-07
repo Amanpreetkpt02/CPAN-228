@@ -1,59 +1,118 @@
 <!DOCTYPE html>
-<!---I am using thymeleaf templating engine -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <!--Creating HTML forms --> 
-   <link
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <title>Form Design</title>
+    <title>DESIGN A FORM</title>
   </head>
   <body>
     <div
       class="d-flex flex-column bd-highlight justify-content-center align-items-center w-75 ms-5"
     >
-    <!--form Title-->
-      <h1 class="mb-3"> Tekken Reborn Fighter</h1>
-      <form>
+      <h1 class="mb-3">Design Tekken Reborn Fighter</h1>
+      
+      
+      <form method="post" th:object="${fighter}">
+        <!--Data is binding to Java backend through ThymeLeaf utilization
+        use the th:field to bind the data to the backend from input fields.
+        -->
+        <div th:if="${#fields.hasErrors()}">
+          <span> Please check problems and  resubmit the form again. </span>
+        </div>
         <div class="mb-3">
           <label for="fighterName" class="form-label">Fighter name: </label>
+          
           <input
             type="text"
             class="form-control"
             id="fighterName"
+            th:field="*{name}"
             aria-describedby="fighterHelp"
           />
           <div id="fighterHelp" class="form-text">
-            Choose appropriate fighter name
+            Provide appropriate fighter name
           </div>
+          <span
+            class="validationError"
+            th:if="${#fields.hasErrors('name')}"
+            th:errors="*{name}"
+          >
+            Name invalid
+          </span>
         </div>
         <div class="mb-3">
           <label for="damagePerHit" class="form-label">Damage per hit: </label>
-          <input type="number" class="form-control" id="damagePerHit" />
+        
+          <input
+            type="number"
+            th:field="*{damagePerHit}"
+            class="form-control"
+            id="damagePerHit"
+          />
+          <span
+            class="validationError"
+            th:if="${#fields.hasErrors('damagePerHit')}"
+            th:errors="*{damagePerHit}"
+          >
+            Name invalid
+          </span>
         </div>
         <div class="mb-3">
           <label for="health" class="form-label">Health: </label>
-          <input type="number" class="form-control" id="health" />
+          
+          <input
+            type="number"
+            th:field="*{health}"
+            class="form-control"
+            id="health"
+          />
+          <span
+            class="validationError"
+            th:if="${#fields.hasErrors('health')}"
+            th:errors="*{health}"
+            >Name invalid
+          </span>
         </div>
         <div class="mb-3">
           <label for="resistance" class="form-label">Resistance: </label>
-          <input type="number" class="form-control" id="resistance" />
+          
+          <input
+            type="number"
+            step="0.1"
+            th:field="*{resistance}"
+            class="form-control"
+            id="resistance"
+          />
+          <span
+            class="validationError"
+            th:if="${#fields.hasErrors('resistance')}"
+            th:errors="*{resistance}"
+            >Resistance error
+          </span>
         </div>
-        <select class="form-select mt-5 mb-5" aria-label="Anime selection">
+        
+        <select
+          th:field="*{animeFrom}"
+          class="form-select mt-5 mb-5"
+          aria-label="Anime selection"
+        >
+         <!--For each anime character in the set loop through them and display them out to the frontend-->
           <option
             th:each="anime: ${animes}"
-            value="${anime}"
-            th:text="${anime}"
+            
+            th:value="${anime}"
+            th:text="${anime.title}"
           />
         </select>
         <button type="submit" class="btn btn-primary mt-5">
-          Create Fighter
+          Create new Fighter
         </button>
       </form>
     </div>
