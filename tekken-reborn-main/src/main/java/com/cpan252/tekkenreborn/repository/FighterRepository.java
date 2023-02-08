@@ -10,5 +10,5 @@ public interface FighterRepository {
 
 Iterable<Fighter> findAll();
 Optional <Fighter> findByid(Long id);
-int save(Fighter fighter);
+void save(Fighter fighter);
 }
