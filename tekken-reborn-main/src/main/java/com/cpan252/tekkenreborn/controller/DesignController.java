@@ -5,7 +5,6 @@ import java.util.EnumSet;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,7 +16,8 @@ import com.cpan252.tekkenreborn.model.Fighter;
 import com.cpan252.tekkenreborn.model.Fighter.Anime;
 import com.cpan252.tekkenreborn.repository.FighterRepository;
 import com.cpan252.tekkenreborn.model.FighterPool;
-
+import org.springframework.validation.BindingResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -25,6 +25,11 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/design")
 @SessionAttributes("fighterPool")
  public class DesignController {
+   
+
+
+    @Autowired
+    private FighterRepository fighterRepository;
 
     @GetMapping
     public String design() {
@@ -49,13 +54,13 @@ import lombok.extern.slf4j.Slf4j;
     }
 
 @PostMapping
-    public String processFighterAddition(@Valid Fighter fighter,
-            @ModelAttribute FighterPool pool, Errors errors) {
-        if (errors.hasErrors()) {
+    public String processFighterAddition(@Valid Fighter fighter,BindingResult result){
+           
+        if (result.hasErrors()) {
             return "design";
         }
         log.info("Processing fighter: {}", fighter);
-        FighterRepository.save(fighter);
+        fighterRepository.save(fighter);
         return "redirect:/fighterlist";
     }
 

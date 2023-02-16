@@ -29,28 +29,28 @@ public class TekkenrebornApplication {
     @Bean  
     public CommandLineRunner dataLoader(FighterRepository repository) {
      return args -> {
-        FighterRepository.save(Fighter.builder()
+        repository.save(Fighter.builder()
             .name("Sukh")
             .animeFrom(Anime.TEKKEN)
             .damagePerHit(89)
             .health(2000)
             .resistance(new BigDecimal(0.5)).build());
 
-			FighterRepository.save(Fighter.builder()
+			repository.save(Fighter.builder()
             .name("Aman")
             .animeFrom(Anime.TEKKEN)
             .damagePerHit(86)
             .health(2100)
             .resistance(new BigDecimal(0.5)).build());
 
-			FighterRepository.save(Fighter.builder()
+			repository.save(Fighter.builder()
             .name("Deepti")
             .animeFrom(Anime.TEKKEN)
             .damagePerHit(90)
             .health(2200)
             .resistance(new BigDecimal(0.5)).build());
 
-			FighterRepository.save(Fighter.builder()
+			repository.save(Fighter.builder()
             .name("Moosa")
             .animeFrom(Anime.TEKKEN)
             .damagePerHit(80)
