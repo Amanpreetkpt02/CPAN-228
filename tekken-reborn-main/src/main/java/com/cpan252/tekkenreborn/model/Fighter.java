@@ -1,8 +1,9 @@
 package com.cpan252.tekkenreborn.model;
-import java.util.Date;
+
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
-
+import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import jakarta.validation.constraints.DecimalMax;
@@ -15,8 +16,24 @@ import lombok.Data;
 
 @Data
 @Builder
+// By using the @Table annotation, we are telling Spring Data to map the table
+// name to the table
 @Table
 public class Fighter {
+    public enum Anime {
+        NARUTO("Naruto"), BLEACH("Bleach"), ONE_PIECE("One Piece"), TEKKEN("Tekken");
+
+        private String title;
+
+        private Anime(String title) {
+            this.title = title;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+    }
+
     @Id
     private Long id;
     @NotBlank
@@ -29,15 +46,6 @@ public class Fighter {
     @DecimalMax(value = "10.0", inclusive = true)
     private BigDecimal resistance;
     private Anime animeFrom;
-    private final Date createdAt = new Date();
-    public enum Anime {
-        NARUTO("Naruto"), BLEACH("Bleach"), ONE_PIECE("One Piece"), TEKKEN("Tekken");
-        private String title;
-        private Anime(String title) {
-            this.title = title;
-        }
-        public String getTitle() {
-            return title;
-        }
-    }
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
 }
