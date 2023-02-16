@@ -10,29 +10,24 @@ import com.cpan252.tekkenreborn.model.Fighter;
 import com.cpan252.tekkenreborn.repository.FighterRepository;
 
 public class JdbcFighterRepository implements FighterRepository {
+    // We could use @Autowired annotation here but it's not recommended
+    // This approach is more testable and more recommended than using @Autowired
     private JdbcTemplate jdbcTemplate;
-
-  
-    public JdbcFighterRepository(JdbcTemplate jdbcTemplate){
+    public JdbcFighterRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
     @Override
     public Iterable<Fighter> findAll() {
-        
+       
         return jdbcTemplate.query("SELECT * FROM fighter", new FighterRowMapper());
     }
 
     @Override
     public Optional<Fighter> findByid(Long id) {
         Fighter fighter = jdbcTemplate.queryForObject("SELECT * FROM fighter WHERE id = ?", new FighterRowMapper(), id);
-        return Optional.ofNullable(fighter);
-        
+        return Optional.ofNullable(fighter); 
     }
-
-    
-    
-    @Override
-    
+   
     public void save(Fighter fighter) {
         var insertFighter = "INSERT INTO fighter (name, damage_per_hit, health, resistance, anime_from, created_at) VALUES (?, ?, ?, ?, ?, ?)";
         var keyHolder = new GeneratedKeyHolder();
@@ -46,7 +41,5 @@ public class JdbcFighterRepository implements FighterRepository {
             ps.setString(6, fighter.getCreatedAt().toString());
             return ps;
         }, keyHolder);
-    }
-    }
-    
-
+}}
+   

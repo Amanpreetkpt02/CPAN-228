@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import jakarta.validation.Valid;
 import com.cpan252.tekkenreborn.model.Fighter;
 import com.cpan252.tekkenreborn.model.Fighter.Anime;
+import com.cpan252.tekkenreborn.repository.FighterRepository;
 import com.cpan252.tekkenreborn.model.FighterPool;
 
 import lombok.extern.slf4j.Slf4j;
@@ -53,8 +54,9 @@ import lombok.extern.slf4j.Slf4j;
         if (errors.hasErrors()) {
             return "design";
         }
-        pool.add(fighter);
-        return "redirect:/design";
+        log.info("Processing fighter: {}", fighter);
+        FighterRepository.save(fighter);
+        return "redirect:/fighterlist";
     }
 
 }
