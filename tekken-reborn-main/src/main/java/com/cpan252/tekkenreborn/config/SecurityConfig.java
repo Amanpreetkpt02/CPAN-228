@@ -33,7 +33,7 @@ public class SecurityConfig {
     }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
+        http
                 .authorizeHttpRequests()
                 .requestMatchers(toH2Console()).permitAll()
                 .requestMatchers("/design", "/fighterlist")
@@ -45,11 +45,11 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/design", true))
                 .logout(logout -> logout
                         .logoutSuccessUrl("/"))
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers(toH2Console()))
                 .headers(headers -> headers
-                        .frameOptions()
-                        .sameOrigin())
-                .build();
+
+                        .frameOptions());
+
+                http.csrf().disable();
+                return http.build();  
     }
 }

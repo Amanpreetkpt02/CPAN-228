@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
@@ -27,6 +28,18 @@ import lombok.Data;
 // name to the table
 @Entity
 public class Fighter {
+    public enum Anime {
+        NARUTO("Naruto"), BLEACH("Bleach"), ONE_PIECE("One Piece"), TEKKEN("Tekken");
+
+        private String title;
+
+        private Anime(String title) {
+            this.title = title;
+        }
+
+        public String getTitle() {
+            return title;
+        }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,17 +57,6 @@ public class Fighter {
     @Builder.Default
     private LocalDate createdAt = LocalDate.now();
 
-    public enum Anime {
-        NARUTO("Naruto"), BLEACH("Bleach"), ONE_PIECE("One Piece"), TEKKEN("Tekken");
-
-        private String title;
-
-        private Anime(String title) {
-            this.title = title;
-        }
-
-        public String getTitle() {
-            return title;
-        }
+   
     }
 }
