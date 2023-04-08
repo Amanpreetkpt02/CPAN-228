@@ -1,4 +1,5 @@
 package com.cpan252.tekkenreborn.controller;
+
 import java.util.EnumSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,35 +20,40 @@ import com.cpan252.tekkenreborn.repository.FighterRepository;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @Slf4j
 @RequestMapping("/design")
 public class DesignController {
+
     /**
      * In java you should use the interface instead of the concrete class.
      * It helps you to switch implementations without having to change the code.
      */
     @Autowired
     private FighterRepository fighterRepository;
+
     @GetMapping
     public String design() {
         return "design";
     }
+
     @ModelAttribute
     public void animes(Model model) {
         var animes = EnumSet.allOf(Anime.class);
         model.addAttribute("animes", animes);
         log.info("animes converted to string:  {}", animes);
     }
+
     
-     
     @ModelAttribute
-    // This model attribute has a lifetime of a request
+    
     public Fighter fighter() {
         return Fighter
                 .builder()
                 .build();
     }
+
     @PostMapping
     public String processFighterAddition(@Valid Fighter fighter, BindingResult result) {
         if (result.hasErrors()) {

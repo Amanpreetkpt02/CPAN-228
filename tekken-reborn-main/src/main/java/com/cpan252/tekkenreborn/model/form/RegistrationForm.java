@@ -1,4 +1,7 @@
 package com.cpan252.tekkenreborn.model.form;
+
+
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.cpan252.tekkenreborn.model.User;
@@ -16,4 +19,5 @@ public class RegistrationForm {
                 .password(passwordEncoder.encode(password))
                 .build();
     }
+
 }

@@ -1,4 +1,5 @@
 package com.cpan252.tekkenreborn.controller.rest;
+
 import java.util.Optional;
 
 import org.springframework.data.domain.PageRequest;
@@ -11,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.cpan252.tekkenreborn.model.Fighter;
 import com.cpan252.tekkenreborn.model.dto.CreateFighter;
+import com.cpan252.tekkenreborn.model.Fighter;
 import com.cpan252.tekkenreborn.repository.FighterRepository;
 import com.cpan252.tekkenreborn.repository.FighterRepositoryPaginated;
 

@@ -17,7 +17,6 @@ import com.cpan252.tekkenreborn.model.dto.FighterSearchByDateDto;
 import com.cpan252.tekkenreborn.repository.FighterRepository;
 import com.cpan252.tekkenreborn.repository.FighterRepositoryPaginated;
 
-
 @Controller
 @RequestMapping("/fighterlist")
 public class FighterListController {
@@ -51,10 +50,12 @@ public class FighterListController {
         model.addAttribute("currentPage", fighterPage.getNumber());
         model.addAttribute("totalPages", fighterPage.getTotalPages());
     }
+
     @ModelAttribute
     public void fightersByDateDto(Model model) {
         model.addAttribute("fightersByDateDto", new FighterSearchByDateDto());
     }
+
     @PostMapping
     public String searchFightersByDate(@ModelAttribute FighterSearchByDateDto fightersByDateDto,
             Model model) {
@@ -62,7 +63,7 @@ public class FighterListController {
         model.addAttribute("fighters", fighterRepository.findByNameStartsWithAndCreatedAtBetween(
                 fightersByDateDto.getName(), LocalDate.parse(fightersByDateDto.getStartDate(), dateFormatter),
                 LocalDate.parse(fightersByDateDto.getEndDate(), dateFormatter)));
-     return "fighterlist";
+        return "fighterlist";
     }
 
     @GetMapping("/switchPage")

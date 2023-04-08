@@ -1,4 +1,5 @@
 package com.cpan252.tekkenreborn.config;
+
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
 import org.springframework.context.annotation.Bean;
@@ -10,8 +11,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
 import com.cpan252.tekkenreborn.model.User;
 import com.cpan252.tekkenreborn.repository.UserRepository;
+
 
 @Configuration
 @EnableMethodSecurity
@@ -21,6 +24,7 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
         return username -> {
@@ -31,6 +35,7 @@ public class SecurityConfig {
             throw new UsernameNotFoundException(username);
         };
     }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -46,10 +51,10 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutSuccessUrl("/"))
                 .headers(headers -> headers
-
                         .frameOptions());
 
-                http.csrf().disable();
-                return http.build();  
+        http.csrf().disable();
+        return http.build();
+
     }
 }
